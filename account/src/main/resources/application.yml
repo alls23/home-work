@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: account-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8082/realms/demo/protocol/openid-connect/certs
+
+keycloak:
+  realm: demo
+  username: admin
+  password: admin
+  grant_type_password: password
+  secret: IWLSnakHG8aNTWNaWuSj0a11UY4lzxd9
+  client_id: account-service
+  login-url: /realms/demo/protocol/openid-connect/token
+  base-url: http://localhost:8082
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-discovery:8761/eureka
