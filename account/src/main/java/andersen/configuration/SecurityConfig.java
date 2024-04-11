@@ -63,11 +63,10 @@ public class SecurityConfig {
 
         @SuppressWarnings("unchecked")
         public Collection<GrantedAuthority> convert(Jwt jwt) {
-            Collection<String> authorities = (Collection<String>) jwt.getClaims().get("scope");
+            String authorities = (String) jwt.getClaims().get("scope");
             return List.of(new SimpleGrantedAuthority("USER"));
         }
 
     }
-
 
 }
