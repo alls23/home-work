@@ -1,1 +1,8 @@
 /account/.gradle/
+/parking/.gradle/
+/api-gateway/.gradle/
+/service-discovery/.gradle/
+/.idea
+.idea
+/shelf/
+/workspace.xml

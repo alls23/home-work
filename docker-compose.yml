@@ -16,6 +16,20 @@ services:
       - service-discovery
       - account-db
 
+  parking-service:
+    build: ./parking
+    ports:
+      - "8085:8085"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-discovery:8761/eureka
+      - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://keycloak:8080/realms/demo/protocol/openid-connect/certs
+      - spring.security.oauth2.resourceserver.jwt.issue-uri=http://keycloak:8080/realms/demo
+      - keycloak.base-url=http://keycloak:8080
+      - r2dbc.url=r2dbc:postgresql://parking-db:5432/public
+    depends_on:
+      - service-discovery
+      - parking-db
+
   service-discovery:
     build: ./service-discovery
     ports:
@@ -70,6 +84,19 @@ services:
     command: [ "postgres", "-c", "log_statement=all" ]
     ports:
       - "5438:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: public
+      PGDATA: /data/postgres
+    volumes:
+      - ./account/local/db:/docker-entrypoint-initdb.d
+
+  parking-db:
+    image: postgres:15.1
+    command: [ "postgres", "-c", "log_statement=all" ]
+    ports:
+      - "5439:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

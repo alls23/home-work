@@ -18,6 +18,7 @@ public class ApiGatewayApplication {
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("account-route", r -> r.path("/cars/**").uri("lb://account-service"))
+                .route("parking-route", r -> r.path("/parking/**").uri("lb://parking-service"))
                 .build();
     }
 }
