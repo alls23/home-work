@@ -56,7 +56,7 @@ Then using JWT you can do more reqeust like:
   ```
 
 ## Design
-[product-screenshot]
+[![Product design][product-screenshot]]
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
