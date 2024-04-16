@@ -36,7 +36,7 @@ Run from root of project:
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: image/diagram.png
+[product-screenshot]: local/images/diagram.png
 
 
 
