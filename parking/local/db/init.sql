@@ -3,6 +3,10 @@ CREATE TABLE parking (
     info VARCHAR(255)
 );
 
+CREATE TABLE parking_order (
+    id serial PRIMARY KEY,
+    status VARCHAR(255)
+);
 
 CREATE TABLE parking_space (
     id SERIAL PRIMARY KEY,

@@ -2,6 +2,8 @@ package andersen.parking.controller;
 
 import andersen.parking.dto.request.BookParkingRequest;
 import andersen.parking.dto.response.ParkingSpaceResponse;
+import andersen.parking.model.ParkingOrderEvent;
+import andersen.parking.producer.ParkingOrderProducer;
 import andersen.parking.service.ParkingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +19,14 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ParkingController {
     private final ParkingService parkingService;
+    private final ParkingOrderProducer parkingOrderProducer;
 
     @GetMapping("/login")
     public Mono<String> dummy() {
-        return Mono.just("Hello, World!");
+        parkingOrderProducer.sendParkingOrder(ParkingOrderEvent.builder()
+                        .parkingId(1)
+                .build());
+        return Mono.just("Hello");
     }
 
     @GetMapping("{parking_id}]")

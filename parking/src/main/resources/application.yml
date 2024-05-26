@@ -1,4 +1,21 @@
 spring:
+  kafka:
+    producer:
+        bootstrap-servers: localhost:9092
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+        bootstrap-servers: localhost:9092
+        group-id: parking-service
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        properties:
+          spring:
+            json:
+              trusted:
+                packages: '*'
+
   r2dbc:
     url: r2dbc:postgresql://localhost:5439/public
     username: postgres
@@ -36,7 +53,12 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
-
+kafka:
+  topics:
+    parking: parking
+    transaction: transaction
+  group-ids:
+    parking-service: parking-service
 #logging:
 #  level:
 #    root: DEBUG
