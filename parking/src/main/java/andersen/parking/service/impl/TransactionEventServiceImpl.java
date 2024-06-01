@@ -25,9 +25,11 @@ public class TransactionEventServiceImpl implements TransactionEventService {
                 .map(order -> setStatus(event, order))
                 .flatMap(order -> {
                     if (event.getStatus().equals(TransactionStatus.UNSUCCESSFUL)) {
+                        order.setStatus(OrderStatus.FAILED);
                         return parkingService.releaseParking(order.getId())
                                 .then(Mono.just(order));
                     }
+                    order.setStatus(OrderStatus.COMPLETED);
                     return Mono.just(order);
                 })
                 .flatMap(parkingOrderRepository::save)

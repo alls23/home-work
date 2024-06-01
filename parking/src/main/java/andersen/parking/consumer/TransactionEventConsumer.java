@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
 
-@RequiredArgsConstructor
 @Configuration
+@RequiredArgsConstructor
 public class TransactionEventConsumer {
 
     private final TransactionEventService transactionEventService;

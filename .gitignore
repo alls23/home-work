@@ -1,5 +1,6 @@
 /account/.gradle/
 /parking/.gradle/
+/payment/.gradle/
 /api-gateway/.gradle/
 /service-discovery/.gradle/
 /.idea

@@ -16,6 +16,15 @@ services:
       - service-discovery
       - account-db
 
+  payment-service:
+    build: ./payment
+    ports:
+      - "8086:8086"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-discovery:8761/eureka
+    depends_on:
+      - service-discovery
+
   parking-service:
     build: ./parking
     ports:
@@ -109,7 +118,7 @@ services:
       POSTGRES_DB: public
       PGDATA: /data/postgres
     volumes:
-      - ./account/local/db:/docker-entrypoint-initdb.d
+      - ./parking/local/db:/docker-entrypoint-initdb.d
   zoo:
     image: zookeeper:3.4.9
     hostname: zoo
