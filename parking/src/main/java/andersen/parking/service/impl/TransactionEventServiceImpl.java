@@ -29,7 +29,6 @@ public class TransactionEventServiceImpl implements TransactionEventService {
                         return parkingService.releaseParking(order.getId())
                                 .then(Mono.just(order));
                     }
-                    order.setStatus(OrderStatus.COMPLETED);
                     return Mono.just(order);
                 })
                 .flatMap(parkingOrderRepository::save)
